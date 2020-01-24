@@ -1,10 +1,22 @@
 <div class="stock-container">
   <!-- 單向綁定 -->
   <div class="name">{{stock.name + ' (' + stock.code + ')'}}</div>
-  <!-- DOM 屬性連結，方括號: 資料從元件流向 HTML -->
+  <!-- [class.class-name]="expression": 根據運算式的布林值，新增/刪除特定類別 -->
+  <!-- [style.style-name]="expression": 根據運算式的布林值，新增/刪除特定樣式 -->
+  <!--
   <div class="price"
-       [class]="stock.isPositiveChange() ? 'positive' : 'negative'">$ {{stock.price}}</div>
+       [class.positive]="stock.isPositiveChange()"
+       [class.negative]="!stock.isPositiveChange()"
+       [style.background-color]="stock.isPositiveChange() ? 'green' : 'red'">$ {{stock.price}}</div>
+  -->
+  <!-- 屬性指令: 改變元素或元件的外觀或行為 -->
+  <!-- NgClass: 修改 class，會保留初始類別 -->
+  <!-- NgStyle: 修改 style，類別修改無效時才使用 -->
+  <div class="price"
+       [ngClass]="stockClasses"
+       [ngStyle]="stockStyles">$ {{stock.price}}</div>
   <!-- 事件連結，括號: 事件從使用者動作流向元件 -->
+  <!-- DOM 屬性連結，會覆寫初始類別，方括號: 資料從元件流向 HTML -->
   <button (click)="toggleFavorite($event)"
           [disabled]="stock.favorite">Add to Favorite
   </button>
