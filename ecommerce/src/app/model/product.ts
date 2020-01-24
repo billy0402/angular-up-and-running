@@ -9,7 +9,9 @@ export class Product {
   }
 
   incrementInCart() {
-    this.quantityInCart += 1;
+    if (this.quantityInCart < 20) {
+      this.quantityInCart += 1;
+    }
   }
 
   decrementInCart() {

@@ -10,6 +10,7 @@ import {Product} from '../../model/product';
 export class ProductItemComponent implements OnInit {
 
   public product: Product;
+  public quantities: Array<number>;
 
   constructor() {
   }
@@ -20,7 +21,8 @@ export class ProductItemComponent implements OnInit {
       78900,
       'https://support.apple.com/library/content/dam/edam/applecare/images/en_US/macbookpro/macbook-pro-2016-15in-device.jpg',
       true
-    )
+    );
+    this.quantities = [...Array(21).keys()];
   }
 
 }
