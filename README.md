@@ -55,6 +55,9 @@ $ ng new <project name> --prefix=acme
 
 # 執行應用程式
 $ ng serve
+
+# 建構新元件
+$ ng generate component <component name>
 ```
 
 ## project tree
