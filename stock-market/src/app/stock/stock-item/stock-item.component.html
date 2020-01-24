@@ -1,11 +1,11 @@
 <div class="stock-container">
   <!-- 單向綁定 -->
-  <div class="name">{{name + ' (' + code + ')'}}</div>
+  <div class="name">{{stock.name + ' (' + stock.code + ')'}}</div>
   <!-- DOM 屬性連結，方括號: 資料從元件流向 HTML -->
   <div class="price"
-       [class]="positiveChange ? 'positive' : 'negative'">$ {{price}}</div>
+       [class]="stock.isPositiveChange() ? 'positive' : 'negative'">$ {{stock.price}}</div>
   <!-- 事件連結，括號: 事件從使用者動作流向元件 -->
   <button (click)="toggleFavorite($event)"
-          [disabled]="favorite">Add to Favorite
+          [disabled]="stock.favorite">Add to Favorite
   </button>
 </div>
