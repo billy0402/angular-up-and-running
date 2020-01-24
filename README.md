@@ -1,4 +1,4 @@
-# angular-up-and-running
+# [angular-up-and-running](https://github.com/shyamseshadri/angular-up-and-running)
 
 ## environment
 
@@ -36,4 +36,41 @@ Package                      Version
 @schematics/update           0.803.23
 rxjs                         6.4.0
     
+$ ng help
+```
+
+## command
+```shell
+# 建構新專案
+$ ng new <project name>
+
+# 使用 CSS.SCSS 或其他 CSS 框架
+$ ng new <project name> --style=css
+
+# 產生導向模組
+$ ng new <project name> --routing
+
+# 元件是否需要前綴
+$ ng new <project name> --prefix=acme
+
+# 執行應用程式
+$ ng serve
+```
+
+## project tree
+```
+<project name>
+├── e2e
+├── src
+│   ├── app
+│   │   ├── app.component.css
+│   │   ├── app.component.html
+│   │   ├── app.component.spec.ts
+│   │   ├── app.component.ts         # 根元件
+│   │   └── app.module.ts            # 主要模組
+│   ├── assets
+│   ├── environments
+│   ├── index.html                   # 根 HTML
+│   ├── main.ts                      # 進入點
+└── angular.json                     # Angular CLI 組態
 ```
