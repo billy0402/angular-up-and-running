@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+
+import {Product} from '../../model/product';
 
 @Component({
   selector: 'app-product-item',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductItemComponent implements OnInit {
 
-  constructor() { }
+  public product: Product;
+
+  constructor() {
+  }
 
   ngOnInit() {
+    this.product = new Product(
+      'MacBook Pro',
+      78900,
+      'https://support.apple.com/library/content/dam/edam/applecare/images/en_US/macbookpro/macbook-pro-2016-15in-device.jpg',
+      true
+    )
   }
 
 }

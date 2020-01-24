@@ -1,0 +1,22 @@
+.product-item {
+  width: 100%;
+  border: 1px solid black;
+  box-sizing: border-box;
+  border-radius: 5px;
+  display: inline-block;
+  padding: 10px;
+}
+
+.product-item .image img {
+  padding: 15px 0;
+  width: 80%;
+}
+
+.product-item .details {
+  font-size: 20px;
+  text-align: center;
+}
+
+.product-item.sale {
+  background-color: lightseagreen;
+}
