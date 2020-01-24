@@ -11,33 +11,39 @@ import {Stock} from '../../model/stock'
 // 實作 OnInit 介面，讓元件在初始化時取得掛鉤
 export class StockItemComponent implements OnInit {
 
-  public stock: Stock;
-  public stockClasses;
-  public stockStyles;
+  public stocks: Array<Stock>;
 
   constructor() { }
 
   // OnInit 函式在元件初始化時觸發
   ngOnInit() {
     // 初始化每個欄位的值
-    this.stock = new Stock('Test Stock Company', 'TSC', 85, 80);
-    let diff = (this.stock.price / this.stock.previousPrice) - 1;
-    let largeChange = Math.abs(diff) > 0.01;
-    this.stockClasses = {
-      'positive': this.stock.isPositiveChange(),
-      'negative': !this.stock.isPositiveChange(),
-      'large-change': largeChange,
-      'small-change': !largeChange
-    };
-    this.stockStyles = {
-      'color': this.stock.isPositiveChange() ? 'green' : 'red',
-      'font-size': largeChange ? '1.2em' : '0.8em'
-    };
+    this.stocks = [
+      new Stock('Test Stock Company', 'TSC', 85, 80),
+      new Stock('Second Stock Company', 'SSC', 10, 20),
+      new Stock('Last Stock Company', 'LSC', 876, 765)
+    ];
   }
 
-  toggleFavorite(event) {
+  getPriceClass(stock) {
+    let diff = (stock.price / stock.previousPrice) - 1;
+    let largeChange = Math.abs(diff) > 0.01;
+    return {
+      'positive': stock.isPositiveChange(),
+      'negative': !stock.isPositiveChange(),
+      'large-change': largeChange,
+      'small-change': !largeChange
+    }
+  }
+
+  toggleFavorite(event, index) {
     console.log('We are toggling the favorite state for this stock', event);
-    this.stock.favorite = !this.stock.favorite;
+    let stock = this.stocks[index];
+    stock.favorite = !stock.favorite;
+  }
+
+  trackStockByCode(index, stock) {
+    return stock.id
   }
 
 }
