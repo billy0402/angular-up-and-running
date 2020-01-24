@@ -58,6 +58,9 @@ $ ng serve
 
 # 建構新元件
 $ ng generate component <component name>
+
+# 產生類別骨架
+$ ng generate class <class name>
 ```
 
 ## project tree
