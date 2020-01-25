@@ -16,15 +16,28 @@ export class AppComponent {
   title = 'stock-market';
 
   public stockObj: Stock;
+  private counter: number = 1;
 
   ngOnInit(): void {
     // 初始化每個欄位的值
-    this.stockObj = new Stock('Test Stock Company', 'TSC', 85, 80);
+    this.stockObj = new Stock(`Test Stock Company - ${this.counter++}`, 'TSC', 85, 80);
   }
 
   onToggleFavorite(stock: Stock) {
     console.log(`Favorite for stock ${stock.name} was triggered.`);
+    // 這會修改股票項目元件中的值，因為他會被連結股票項目元件的事件觸發
     stock.favorite = !stock.favorite;
+  }
+
+  changeStockObject() {
+    // 這會修改股票項目元件中的值，因為我們建構股票輸入的新參考
+    this.stockObj = new Stock(`Test Stock Company - ${this.counter++}`, 'TSC', 85, 80);
+  }
+
+  changeStockPrice() {
+    // 這會修改股票項目元件中的值，因為它改變參考
+    // 但 Angular 因 OnPush 變更檢測策略而不會檢查，不會更新視圖
+    this.stockObj.price += 10;
   }
 
 }

@@ -6,4 +6,8 @@
   <!-- 加入 stock-item 元件 -->
   <app-stock-item [stock]="stockObj"
                   (toggleFavorite)="onToggleFavorite($event)"></app-stock-item>
+  <div>
+    <button (click)="changeStockObject()">Change Stock</button>
+    <button (click)="changeStockPrice()">Change Price</button>
+  </div>
 </div>
