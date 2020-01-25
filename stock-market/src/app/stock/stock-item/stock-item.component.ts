@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 import {Stock} from '../../model/stock'
 
@@ -14,8 +14,10 @@ import {Stock} from '../../model/stock'
 export class StockItemComponent implements OnInit {
 
   @Input() public stocks: Array<Stock>;
+  @Output() private toggleFavorite: EventEmitter<Stock>;
 
   constructor() {
+    this.toggleFavorite = new EventEmitter<Stock>();
   }
 
   // OnInit 函式在元件初始化時觸發
@@ -33,10 +35,10 @@ export class StockItemComponent implements OnInit {
     }
   }
 
-  toggleFavorite(event, index) {
+  onToggleFavorite(event, index) {
     console.log('We are toggling the favorite state for this stock', event);
     let stock = this.stocks[index];
-    stock.favorite = !stock.favorite;
+    this.toggleFavorite.emit(stock);
   }
 
   trackStockByCode(index, stock) {

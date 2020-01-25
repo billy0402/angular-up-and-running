@@ -4,5 +4,6 @@
     Welcome to {{title}}!
   </h1>
   <!-- 加入 stock-item 元件 -->
-  <app-stock-item [stocks]="stockObjs"></app-stock-item>
+  <app-stock-item [stocks]="stockObjs"
+                  (toggleFavorite)="onToggleFavorite($event)"></app-stock-item>
 </div>

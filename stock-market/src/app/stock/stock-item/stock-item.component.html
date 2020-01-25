@@ -10,7 +10,7 @@
        [ngClass]="getPriceClass(stock)">$ {{stock.price}}</div>
   <!-- 結構指令: 增加或刪除元素改變 DOM，語法以星號開頭 -->
   <!-- NgIf: 依條件隱藏或顯示元素 -->
-  <button (click)="toggleFavorite($event, i)"
+  <button (click)="onToggleFavorite($event, i)"
           *ngIf="!stock.favorite">Add to Favorite
   </button>
 </div>

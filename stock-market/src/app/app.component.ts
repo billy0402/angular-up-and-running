@@ -26,4 +26,9 @@ export class AppComponent {
     ];
   }
 
+  onToggleFavorite(stock: Stock) {
+    console.log(`Favorite for stock ${stock.name} was triggered.`);
+    stock.favorite = !stock.favorite;
+  }
+
 }
