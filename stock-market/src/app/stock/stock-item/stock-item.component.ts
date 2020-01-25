@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 import {Stock} from '../../model/stock'
 
@@ -13,18 +13,13 @@ import {Stock} from '../../model/stock'
 // 實作 OnInit 介面，讓元件在初始化時取得掛鉤
 export class StockItemComponent implements OnInit {
 
-  public stocks: Array<Stock>;
+  @Input() public stocks: Array<Stock>;
 
-  constructor() { }
+  constructor() {
+  }
 
   // OnInit 函式在元件初始化時觸發
   ngOnInit() {
-    // 初始化每個欄位的值
-    this.stocks = [
-      new Stock('Test Stock Company', 'TSC', 85, 80),
-      new Stock('Second Stock Company', 'SSC', 10, 20),
-      new Stock('Last Stock Company', 'LSC', 876, 765)
-    ];
   }
 
   getPriceClass(stock) {
