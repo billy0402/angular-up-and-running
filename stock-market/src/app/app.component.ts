@@ -40,4 +40,8 @@ export class AppComponent implements OnInit {
     this.stockObj.price += 10;
   }
 
+  testMethod() {
+    console.log('Test method in AppComponent triggered')
+  }
+
 }

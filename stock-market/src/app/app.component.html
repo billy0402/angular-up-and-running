@@ -3,9 +3,18 @@
     <!-- 資料連結的標題 -->
     Welcome to {{title}}!
   </h1>
+
   <!-- 加入 stock-item 元件 -->
   <app-stock-item [stock]="stockObj"
-                  (toggleFavorite)="onToggleFavorite($event)"></app-stock-item>
+                  (toggleFavorite)="onToggleFavorite($event)">
+    <button (click)="testMethod()">With Button 1</button>
+  </app-stock-item>
+
+  <app-stock-item [stock]="stockObj"
+                  (toggleFavorite)="onToggleFavorite($event)">
+    No Button for you!
+  </app-stock-item>
+
   <div>
     <button (click)="changeStockObject()">Change Stock</button>
     <button (click)="changeStockPrice()">Change Price</button>

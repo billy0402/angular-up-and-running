@@ -13,4 +13,6 @@
           *ngIf="!stock.favorite">Add to Favorite
   </button>
   <button (click)="changeStockPrice()">Change Price</button>
+  <!-- 投射用的 ng-content 元素 -->
+  <ng-content></ng-content>
 </div>
