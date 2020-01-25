@@ -1,28 +1,37 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 import {Product} from '../../model/product';
+import {ProductQuantityChange} from '../../model/productQuantityChange';
 
 @Component({
   selector: 'app-product-item',
   templateUrl: './product-item.component.html',
-  styleUrls: ['./product-item.component.css']
+  styleUrls: ['./product-item.component.css'],
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class ProductItemComponent implements OnInit {
 
-  public product: Product;
-  public quantities: Array<number>;
+  @Input() public product: Product;
+  @Output() private quantityChange: EventEmitter<ProductQuantityChange> = new EventEmitter();
 
   constructor() {
   }
 
   ngOnInit() {
-    this.product = new Product(
-      'MacBook Pro',
-      78900,
-      'https://support.apple.com/library/content/dam/edam/applecare/images/en_US/macbookpro/macbook-pro-2016-15in-device.jpg',
-      true
-    );
-    this.quantities = [...Array(21).keys()];
+  }
+
+  getProductImageUrl(url: String) {
+    return `https://www.apple.com/v/mac/compare/m/images/overview/${url}.jpg`
+  }
+
+  incrementInCart() {
+    this.quantityChange.emit({product: this.product, changeInQuantity: 1});
+  }
+
+  decrementInCart() {
+    if (this.product.quantityInCart > 0) {
+      this.quantityChange.emit({product: this.product, changeInQuantity: -1});
+    }
   }
 
 }

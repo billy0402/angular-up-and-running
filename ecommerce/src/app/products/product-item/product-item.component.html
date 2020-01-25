@@ -1,15 +1,12 @@
 <div class="product-item" [class.sale]="product.isOnSale">
-  <div class="image"><img [src]="product.imageUrl" [alt]="product.name"></div>
+  <div class="image"><img [src]="getProductImageUrl(product.imageUrl)" [alt]="product.name"></div>
   <div class="details">
     <div>{{product.name}}</div>
-    <div>$ {{product.price}}</div>
+    <div>NT$ {{product.price}}</div>
     <div>
-      <button *ngIf="product.quantityInCart > 0" (click)="product.decrementInCart()">-</button>
-      <select> 　
-        <option *ngFor="let quantity of quantities" [value]="quantity"
-                [selected]="quantity==product.quantityInCart">{{quantity}}</option>
-      </select>
-      <button *ngIf="product.quantityInCart < 20" (click)="product.incrementInCart()">+
+      <button *ngIf="product.quantityInCart > 0" (click)="decrementInCart()">-</button>
+      <span>{{product.quantityInCart}}</span>
+      <button (click)="incrementInCart()">+
       </button>
     </div>
   </div>
