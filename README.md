@@ -80,3 +80,17 @@ $ ng generate class <class name>
 │   ├── main.ts                      # 進入點
 └── angular.json                     # Angular CLI 組態
 ```
+
+## lifecycle hooks
+```
+constructor
+
+ngOnChanges
+ngOnInit
+ngDoCheck
+    ngAfterContentInit
+    ngAfterContentChecked
+    ngAfterViewInit
+    ngAfterViewChecked
+ngOnDestroy
+```

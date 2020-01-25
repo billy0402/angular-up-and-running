@@ -1,4 +1,14 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output, SimpleChanges} from '@angular/core';
+import {
+  OnChanges,
+  OnInit,
+  DoCheck,
+  AfterContentInit,
+  AfterContentChecked,
+  AfterViewInit,
+  AfterViewChecked,
+  OnDestroy
+} from '@angular/core';
 
 import {Stock} from '../../model/stock'
 
@@ -13,17 +23,14 @@ import {Stock} from '../../model/stock'
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 // 實作 OnInit 介面，讓元件在初始化時取得掛鉤
-export class StockItemComponent implements OnInit {
+export class StockItemComponent implements OnChanges, OnInit, DoCheck, OnDestroy,
+  AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked {
 
   @Input() public stock: Stock;
   @Output() private toggleFavorite: EventEmitter<Stock>;
 
   constructor() {
     this.toggleFavorite = new EventEmitter<Stock>();
-  }
-
-  // OnInit 函式在元件初始化時觸發
-  ngOnInit() {
   }
 
   getPriceClass() {
@@ -44,6 +51,39 @@ export class StockItemComponent implements OnInit {
 
   changeStockPrice() {
     this.stock.price += 5;
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('Stock Item Component - On Changes', changes);
+  }
+
+  // OnInit 函式在元件初始化時觸發
+  ngOnInit(): void {
+    console.log('Stock Item Component - On Init');
+  }
+
+  ngDoCheck(): void {
+    console.log('Stock Item Component - Do Check');
+  }
+
+  ngAfterContentInit(): void {
+    console.log('Stock Item Component - After Content Init');
+  }
+
+  ngAfterContentChecked(): void {
+    console.log('Stock Item Component - After Content Checked');
+  }
+
+  ngAfterViewInit(): void {
+    console.log('Stock Item Component - After View Init');
+  }
+
+  ngAfterViewChecked(): void {
+    console.log('Stock Item Component - After View Checked');
+  }
+
+  ngOnDestroy(): void {
+    console.log('Stock Item Component - On Destroy');
   }
 
 }

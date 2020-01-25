@@ -1,4 +1,14 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, SimpleChanges} from '@angular/core';
+import {
+  OnChanges,
+  OnInit,
+  DoCheck,
+  AfterContentInit,
+  AfterContentChecked,
+  AfterViewInit,
+  AfterViewChecked,
+  OnDestroy
+} from '@angular/core';
 
 import {Stock} from './model/stock';
 
@@ -11,17 +21,13 @@ import {Stock} from './model/stock';
   styleUrls: ['./app.component.css']
 })
 // 元件類別與成員和函式
-export class AppComponent {
+export class AppComponent implements OnChanges, OnInit, DoCheck, OnDestroy,
+  AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked {
 
   title = 'stock-market';
 
   public stockObj: Stock;
   private counter: number = 1;
-
-  ngOnInit(): void {
-    // 初始化每個欄位的值
-    this.stockObj = new Stock(`Test Stock Company - ${this.counter++}`, 'TSC', 85, 80);
-  }
 
   onToggleFavorite(stock: Stock) {
     console.log(`Favorite for stock ${stock.name} was triggered.`);
@@ -38,6 +44,40 @@ export class AppComponent {
     // 這會修改股票項目元件中的值，因為它改變參考
     // 但 Angular 因 OnPush 變更檢測策略而不會檢查，不會更新視圖
     this.stockObj.price += 10;
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('App Component - On Changes', changes);
+  }
+
+  ngOnInit(): void {
+    console.log('App Component - On Init');
+    // 初始化每個欄位的值
+    this.stockObj = new Stock(`Test Stock Company - ${this.counter++}`, 'TSC', 85, 80);
+  }
+
+  ngDoCheck(): void {
+    console.log('App Component - Do Check');
+  }
+
+  ngAfterContentInit(): void {
+    console.log('App Component - After Content Init');
+  }
+
+  ngAfterContentChecked(): void {
+    console.log('App Component - After Content Checked');
+  }
+
+  ngAfterViewInit(): void {
+    console.log('App Component - After View Init');
+  }
+
+  ngAfterViewChecked(): void {
+    console.log('App Component - After View Checked');
+  }
+
+  ngOnDestroy(): void {
+    console.log('App Component - On Destroy');
   }
 
 }
