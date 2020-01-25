@@ -15,15 +15,11 @@ export class AppComponent {
 
   title = 'stock-market';
 
-  public stockObjs: Array<Stock>;
+  public stockObj: Stock;
 
   ngOnInit(): void {
     // 初始化每個欄位的值
-    this.stockObjs = [
-      new Stock('Test Stock Company', 'TSC', 85, 80),
-      new Stock('Second Stock Company', 'SSC', 10, 20),
-      new Stock('Last Stock Company', 'LSC', 876, 765)
-    ];
+    this.stockObj = new Stock('Test Stock Company', 'TSC', 85, 80);
   }
 
   onToggleFavorite(stock: Stock) {

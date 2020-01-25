@@ -1,16 +1,15 @@
 <!-- NgFor: 建構多個元素 -->
 <!-- trackBy: 提供 NgFor 使用函式回傳值而非物件參考識別，來決定如何識別個別項目，確保會重新載入所有項目 -->
-<div class="stock-container"
-     *ngFor="let stock of stocks; index as i; trackBy: trackStockByCode">
+<div class="stock-container">
   <!-- 單向綁定 -->
   <div class="name">{{stock.name + ' (' + stock.code + ')'}}</div>
   <!-- 屬性指令: 改變元素或元件的外觀或行為 -->
   <!-- NgClass: 修改 class，會保留初始類別 -->
   <div class="price"
-       [ngClass]="getPriceClass(stock)">$ {{stock.price}}</div>
+       [ngClass]="getPriceClass()">$ {{stock.price}}</div>
   <!-- 結構指令: 增加或刪除元素改變 DOM，語法以星號開頭 -->
   <!-- NgIf: 依條件隱藏或顯示元素 -->
-  <button (click)="onToggleFavorite($event, i)"
+  <button (click)="onToggleFavorite($event)"
           *ngIf="!stock.favorite">Add to Favorite
   </button>
 </div>

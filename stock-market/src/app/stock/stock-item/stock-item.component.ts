@@ -13,7 +13,7 @@ import {Stock} from '../../model/stock'
 // 實作 OnInit 介面，讓元件在初始化時取得掛鉤
 export class StockItemComponent implements OnInit {
 
-  @Input() public stocks: Array<Stock>;
+  @Input() public stock: Stock;
   @Output() private toggleFavorite: EventEmitter<Stock>;
 
   constructor() {
@@ -24,25 +24,20 @@ export class StockItemComponent implements OnInit {
   ngOnInit() {
   }
 
-  getPriceClass(stock) {
-    let diff = (stock.price / stock.previousPrice) - 1;
+  getPriceClass() {
+    let diff = (this.stock.price / this.stock.previousPrice) - 1;
     let largeChange = Math.abs(diff) > 0.01;
     return {
-      'positive': stock.isPositiveChange(),
-      'negative': !stock.isPositiveChange(),
+      'positive': this.stock.isPositiveChange(),
+      'negative': !this.stock.isPositiveChange(),
       'large-change': largeChange,
       'small-change': !largeChange
-    }
+    };
   }
 
-  onToggleFavorite(event, index) {
+  onToggleFavorite(event) {
     console.log('We are toggling the favorite state for this stock', event);
-    let stock = this.stocks[index];
-    this.toggleFavorite.emit(stock);
-  }
-
-  trackStockByCode(index, stock) {
-    return stock.id
+    this.toggleFavorite.emit(this.stock);
   }
 
 }
