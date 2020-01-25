@@ -1,7 +1,7 @@
 <!-- NgFor: 建構多個元素 -->
 <!-- trackBy: 提供 NgFor 使用函式回傳值而非物件參考識別，來決定如何識別個別項目，確保會重新載入所有項目 -->
 <div class="stock-container"
-     *ngFor="let stock of stocks; index as i; even as isEven; odd as isOdd; first as isFirst; last as isLast; trackBy: trackStockByCode">
+     *ngFor="let stock of stocks; index as i; trackBy: trackStockByCode">
   <!-- 單向綁定 -->
   <div class="name">{{stock.name + ' (' + stock.code + ')'}}</div>
   <!-- 屬性指令: 改變元素或元件的外觀或行為 -->
@@ -13,21 +13,4 @@
   <button (click)="toggleFavorite($event, i)"
           *ngIf="!stock.favorite">Add to Favorite
   </button>
-  <div>isEven: {{isEven}}</div>
-  <div>isOdd: {{isOdd}}</div>
-  <div>isFirst: {{isFirst}}</div>
-  <div>isLast: {{isLast}}</div>
 </div>
-
-<!-- 當 *ngSwitchCase 內的運算式與 ngSwitch 的運算式相符合時， -->
-<!-- 便會繪製相對應的元素，並刪除其他元素， -->
-<!-- 都不符合時則繪製時，則繪製含有 *ngSwitchDefault 的元件 -->
-<!--
-<div [ngSwitch]="security.type">
-  <stock-item *ngSwitchCase="'stock'" [item]="security"></stock-item>
-  <option-item *ngSwitchCase="'option'" [item]="security"></option-item>
-  <derivative-item *ngSwitchCase="'derivative'" [item]="security"></derivative-item>
-  <mutual-fund-item *ngSwitchCase="'mutual-fund'" [item]="security"></mutual-fund-item>
-  <unknown-item *ngSwitchDefault [item]="security"></unknown-item>
-</div>
--->
