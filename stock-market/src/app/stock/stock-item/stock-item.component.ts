@@ -5,50 +5,10 @@ import {Stock} from '../../model/stock'
 @Component({
   // 使用此元件的選擇器。注意它前綴的 app，這是 Angular CLI 依預設加入的，可以自行指定。
   selector: 'app-stock-item', // <- <app-stock-item></app-stock-item>
-  // selector: '.app-stock-item', // <- <div class="app-stock-item"></div>
-  // selector: '[app-stock-item]', // <- <div app-stock-item></div>
   // 模板
-  // templateUrl: './stock-item.component.html', // 相對路徑
-  // templateUrl: 'stock-item.component.html', // 絕對路徑，失敗率高
-  template: `
-    <div class="stock-container"
-         *ngFor="let stock of stocks; index as i; trackBy: trackStockByCode">
-      <div class="name">{{stock.name + ' (' + stock.code + ')'}}</div>
-      <div class="price"
-           [ngClass]="getPriceClass(stock)">$ {{stock.price}}</div>
-      <button (click)="toggleFavorite($event, i)"
-              *ngIf="!stock.favorite">Add to Favorite
-      </button>
-    </div>
-  `,
+  templateUrl: './stock-item.component.html', // 相對路徑
   // 樣式
-  // styleUrls: ['./stock-item.component.css']
-  styles: [
-      `
-      .stock-container {
-        border: 1px solid black;
-        border-radius: 5px;
-        display: inline-block;
-        padding: 10px;
-      }
-
-      .positive {
-        color: green;
-      }
-
-      .negative {
-        color: red;
-      }
-
-      .large-change {
-        font-size: 1.2em;
-      }
-
-      .small-change {
-        font-size: 0.8em;
-      }
-    `
-  ]
+  styleUrls: ['./stock-item.component.css']
 })
 // 實作 OnInit 介面，讓元件在初始化時取得掛鉤
 export class StockItemComponent implements OnInit {
