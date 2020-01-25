@@ -1,4 +1,4 @@
-// Karma configuration file, see link for more information
+// Karma 組態檔案，更多資訊見以下網址
 // https://karma-runner.github.io/1.0/config/configuration-file.html
 
 module.exports = function (config) {
@@ -13,7 +13,7 @@ module.exports = function (config) {
       require('@angular-devkit/build-angular/plugins/karma')
     ],
     client: {
-      clearContext: false // leave Jasmine Spec Runner output visible in browser
+      clearContext: false // 在瀏覽器中顯示 Jasmine Spec Runner 的輸出
     },
     coverageIstanbulReporter: {
       dir: require('path').join(__dirname, './coverage/stock-market'),

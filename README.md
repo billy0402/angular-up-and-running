@@ -61,6 +61,9 @@ $ ng generate component <component name>
 
 # 產生類別骨架
 $ ng generate class <class name>
+
+# 執行測試
+$ ng test
 ```
 
 ## project tree
