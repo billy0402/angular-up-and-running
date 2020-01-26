@@ -3,6 +3,7 @@
 <div class="stock-container">
   <!-- 單向綁定 -->
   <div class="name">{{stock.name + ' (' + stock.code + ')'}}</div>
+  <div class="exchange">{{stock.exchange}}</div>
   <!-- 屬性指令: 改變元素或元件的外觀或行為 -->
   <!-- NgClass: 修改 class，會保留初始類別 -->
   <div class="price"
@@ -12,7 +13,7 @@
   <button (click)="onToggleFavorite($event)"
           *ngIf="!stock.favorite">Add to Favorite
   </button>
-  <button (click)="changeStockPrice()">Change Price</button>
-  <!-- 投射用的 ng-content 元素 -->
-  <ng-content></ng-content>
+  <button (click)="onToggleFavorite($event)"
+          *ngIf="stock.favorite">Remove from Favorite
+  </button>
 </div>

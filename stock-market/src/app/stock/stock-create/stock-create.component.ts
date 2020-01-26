@@ -14,12 +14,13 @@ export class StockCreateComponent {
   private stock: Stock;
   // 宣告時不再初始化 FormGroup
   public stockForm: FormGroup;
+  public exchanges: string[] = ['NYSE', 'NASDAQ', 'OTHER'];
 
   // 將 FormBuilder 實例注入建構元
   constructor(private formBuilder: FormBuilder) {
     this.createForm();
     // 以一些預設值初始化股票模型
-    this.stock = new Stock('Test', 'TST', 20, 10);
+    this.stock = new Stock('Test', 'TST', 20, 10, this.exchanges[1]);
   }
 
   get name() {
@@ -46,6 +47,7 @@ export class StockCreateComponent {
       name: [null, Validators.required],
       code: [null, [Validators.required, Validators.minLength(2)]],
       price: [0, [Validators.required, Validators.min(0)]],
+      exchange: this.exchanges[1],
       // notablePeople 初始化為 FormArray 實例
       notablePeople: this.formBuilder.array([])
     })

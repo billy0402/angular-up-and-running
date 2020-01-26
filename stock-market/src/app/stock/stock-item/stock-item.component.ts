@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 import {Stock} from '../../model/stock'
 
@@ -8,9 +8,7 @@ import {Stock} from '../../model/stock'
   // 模板
   templateUrl: './stock-item.component.html', // 相對路徑
   // 樣式
-  styleUrls: ['./stock-item.component.css'],
-  // 根據此元件的 Input 決定是否要檢查
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./stock-item.component.css']
 })
 // 實作 OnInit 介面，讓元件在初始化時取得掛鉤
 export class StockItemComponent implements OnInit {
@@ -40,10 +38,6 @@ export class StockItemComponent implements OnInit {
   onToggleFavorite(event) {
     console.log('We are toggling the favorite state for this stock', event);
     this.toggleFavorite.emit(this.stock);
-  }
-
-  changeStockPrice() {
-    this.stock.price += 5;
   }
 
 }

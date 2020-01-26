@@ -50,6 +50,13 @@
       </div>
     </div>
 
+    <div class="stock-exchange">
+      <select name="exchange" formControlName="exchange">
+        <option *ngFor="let exchange of exchanges"
+                [ngValue]="exchange">{{exchange}}</option>
+      </select>
+    </div>
+
     <div formArrayName="notablePeople">
       <div class="notable-people"
            *ngFor="let person of notablePeople.controls; let i = index;"

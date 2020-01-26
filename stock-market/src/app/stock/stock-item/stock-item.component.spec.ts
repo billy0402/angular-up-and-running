@@ -25,7 +25,7 @@ describe('Stock Item Component', () => {
     fixture = TestBed.createComponent(StockItemComponent);
     // 取得測試元件實例
     component = fixture.componentInstance;
-    component.stock = new Stock('Testing Stock', 'TS', 100, 200);
+    component.stock = new Stock('Testing Stock', 'TS', 100, 200, 'NASDAQ');
     // 手動觸發 Angular 的變更檢測以更新模板
     fixture.detectChanges();
   });
