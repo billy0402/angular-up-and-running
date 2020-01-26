@@ -70,24 +70,24 @@ describe('Product List Component', () => {
       const productItems = fixture.debugElement.queryAll(By.css('app-product-item'));
       expect(productItems.length).toEqual(3);
       assertProduct(productItems[0], 'MacBook Air (Retina)', 36900, 0);
-      assertProduct(productItems[1], 'MacBook Pro 13 吋 (兩個 Thunderbolt 3 埠)', 42900, 0);
+      assertProduct(productItems[1], 'MacBook Pro 13 吋', 42900, 0);
       assertProduct(productItems[2], 'MacBook Pro 16 吋', 77900, 0);
     });
 
     it('should handle increment item correctly from child product', () => {
       const productItems = fixture.debugElement.queryAll(By.css('app-product-item'));
 
-      assertProduct(productItems[1], 'MacBook Pro 13 吋 (兩個 Thunderbolt 3 埠)', 42900, 0);
+      assertProduct(productItems[1], 'MacBook Pro 13 吋', 42900, 0);
       const incrementBtnForSecondProduct = productItems[1].query(By.css('button.increment'));
       incrementBtnForSecondProduct.triggerEventHandler('click', null);
       fixture.detectChanges();
-      assertProduct(productItems[1], 'MacBook Pro 13 吋 (兩個 Thunderbolt 3 埠)', 42900, 1);
+      assertProduct(productItems[1], 'MacBook Pro 13 吋', 42900, 1);
       expect(component.products[1].quantityInCart).toEqual(1);
 
       const decrementBtnForSecondProduct = productItems[1].query(By.css('button.decrement'));
       decrementBtnForSecondProduct.triggerEventHandler('click', null);
       fixture.detectChanges();
-      assertProduct(productItems[1], 'MacBook Pro 13 吋 (兩個 Thunderbolt 3 埠)', 42900, 0);
+      assertProduct(productItems[1], 'MacBook Pro 13 吋', 42900, 0);
       expect(component.products[1].quantityInCart).toEqual(0);
     });
 

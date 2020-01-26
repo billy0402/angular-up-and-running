@@ -6,8 +6,9 @@ import {ProductQuantityChange} from '../../model/productQuantityChange';
 @Component({
   selector: 'app-product-list',
   template: `
-    <div class="product-list" *ngFor="let product of products">
-      <app-product-item [product]="product"
+    <div class="product-list">
+      <app-product-item *ngFor="let product of products"
+                        [product]="product"
                         (quantityChange)="onQuantityChange($event)"></app-product-item>
     </div>
   `,
@@ -27,7 +28,7 @@ export class ProductListComponent implements OnInit {
       ),
       new Product(
         2,
-        'MacBook Pro 13 吋 (兩個 Thunderbolt 3 埠)',
+        'MacBook Pro 13 吋',
         42900,
         'compare_macbook_pro_13_spacegray__jy60myikwne6_large_2x',
       ),

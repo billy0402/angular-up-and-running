@@ -1,1 +1,64 @@
-<p>product-create works!</p>
+<h2>Create Product Form</h2>
+
+<div class="product-create">
+  <h4 class="error">{{message}}</h4>
+
+  <form (ngSubmit)="createProduct(productForm)" #productForm="ngForm">
+    <div ngModelGroup="product">
+      <div class="product-name">
+        <input type="text"
+               placeholder="Product Name"
+               name="name"
+               ngModel
+               #productName="ngModel"
+               required>
+      </div>
+      <div class="error" *ngIf="(productName.dirty  || message) && productName.invalid">
+        <!-- Cheating, since there is only one way the product name field could be invalid -->
+        Product name is required
+      </div>
+
+      <div class="product-price">
+        <input type="number"
+               placeholder="Product Price"
+               name="price"
+               ngModel
+               #productPrice="ngModel"
+               required>
+      </div>
+      <div class="error" *ngIf="(productPrice.dirty || message) && productPrice.invalid">
+        <!-- Cheating, since there is only one way the product name field could be invalid -->
+        Product price is required
+      </div>
+
+      <div class="product-image-url">
+        <input type="text"
+               placeholder="Product Image URL"
+               name="imageUrl"
+               ngModel
+               #productImageUrl="ngModel"
+               required
+               pattern="^http(s?)\://[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(/\S*)?$">
+      </div>
+      <div class="error" *ngIf="(productImageUrl.dirty || message) && productImageUrl.invalid">
+        <div *ngIf="productImageUrl.errors.required">
+          Product Image URL is required
+        </div>
+        <div *ngIf="productImageUrl.errors.pattern">
+          Product Image URL does not seem to be a valid URL
+        </div>
+      </div>
+
+      <div class="product-is-on-sale">
+        <input type="checkbox"
+               name="isOnSale"
+               ngModel>
+        On Sale
+      </div>
+    </div>
+
+    <button type="submit">Create</button>
+  </form>
+</div>
+
+<h4>Product is {{product | json}}</h4>
