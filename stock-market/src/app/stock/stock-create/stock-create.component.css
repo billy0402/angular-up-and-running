@@ -5,13 +5,13 @@ Changed      ng-dirty       ng-pristine
 Valid        ng-valid       ng-invalid
 */
 .stock-name .ng-valid,
-.stock-code .ng-pristine,
-.stock-price .ng-untouched {
+.stock-code .ng-valid,
+.stock-price .ng-valid {
   background-color: green;
 }
 
 .stock-name .ng-invalid,
-.stock-code .ng-dirty,
-.stock-price .ng-touched {
+.stock-code .ng-invalid,
+.stock-price .ng-invalid {
   background-color: pink;
 }
