@@ -15,3 +15,9 @@ Valid        ng-valid       ng-invalid
 .stock-price .ng-invalid {
   background-color: pink;
 }
+
+.notable-people {
+  border: 1px solid black;
+  margin: 5px;
+  padding: 10px;
+}

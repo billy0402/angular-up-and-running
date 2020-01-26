@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 import {Stock} from '../../model/stock';
-
-let counter: number = 1;
 
 @Component({
   selector: 'app-stock-create',
@@ -21,8 +19,7 @@ export class StockCreateComponent {
   constructor(private formBuilder: FormBuilder) {
     this.createForm();
     // 以一些預設值初始化股票模型
-    this.stock = new Stock(`Test ${counter}`, 'TST', 20, 10);
-    counter++;
+    this.stock = new Stock('Test', 'TST', 20, 10);
   }
 
   get name() {
@@ -37,14 +34,34 @@ export class StockCreateComponent {
     return this.stockForm.get('price');
   }
 
+  // 方便從模板存取 FormArray 的 getter
+  get notablePeople(): FormArray {
+    return this.stockForm.get('notablePeople') as FormArray;
+  }
+
   createForm() {
     // 使用注入的 FormBuilder 建構 FormGroup
     this.stockForm = this.formBuilder.group({
       // 以空值初始化名稱控制項與必要的檢驗程序
       name: [null, Validators.required],
       code: [null, [Validators.required, Validators.minLength(2)]],
-      price: [0, [Validators.required, Validators.min(0)]]
+      price: [0, [Validators.required, Validators.min(0)]],
+      // notablePeople 初始化為 FormArray 實例
+      notablePeople: this.formBuilder.array([])
     })
+  }
+
+  // 將新的 FormGroup 實例加入 FormArray
+  addNotablePerson() {
+    this.notablePeople.push(this.formBuilder.group({
+      name: ['', Validators.required],
+      title: ['', Validators.required]
+    }));
+  }
+
+  // 從 FormArray 刪除特定 FormGroup 實例
+  removeNotablePerson(index: number) {
+    this.notablePeople.removeAt(index);
   }
 
   onSubmit() {
@@ -55,26 +72,6 @@ export class StockCreateComponent {
   resetForm() {
     // 重置表單到初始狀態
     this.stockForm.reset();
-  }
-
-  loadStockFormServer() {
-    this.stock = new Stock(`Test ${counter}`, 'TST', 20, 10);
-    counter++;
-
-    let stockFormModel = {...this.stock};
-    delete stockFormModel.previousPrice;
-    delete stockFormModel.favorite;
-
-    // 以 Stock 資料模型值設定整個表單模型
-    this.stockForm.setValue(stockFormModel);
-  }
-
-  patchStockForm() {
-    this.stock = new Stock(`Test ${counter}`, 'TST', 20, 10);
-    counter++;
-
-    // 以可用欄位更新表單模型
-    this.stockForm.patchValue(this.stock);
   }
 
 }
