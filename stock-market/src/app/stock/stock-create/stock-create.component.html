@@ -4,8 +4,10 @@
   <!-- 透過 ngSubmit 事件處理程序，處理表單提交 -->
   <form (ngSubmit)="createStock()">
     <div class="stock-name">
+      <!-- 將股票名稱加上必要屬性 -->
       <input type="text" placeholder="Stock Name"
-             name="stockName" [(ngModel)]="stock.name">
+             name="stockName" [(ngModel)]="stock.name"
+             required>
     </div>
     <div class="stock-code">
       <input type="text" placeholder="Stock Code"
@@ -18,21 +20,6 @@
              (ngModelChange)="setStockPrice($event)">
     </div>
     <div class="stock-exchange">
-      <!-- 透過 ngModel 處理單選按鈕 -->
-      <!--
-      <div>
-        <input type="radio" name="stockExchange"
-               [(ngModel)]="stock.exchange" value="NYSE">NYSE
-      </div>
-      <div>
-        <input type="radio" name="stockExchange"
-               [(ngModel)]="stock.exchange" value="NASDAQ">NASDAQ
-      </div>
-      <div>
-        <input type="radio" name="stockExchange"
-               [(ngModel)]="stock.exchange" value="OTHER">OTHER
-      </div>
-      -->
       <select name="stockExchange" [(ngModel)]="stock.exchange">
         <option *ngFor="let exchange of exchanges"
                 [ngValue]="exchange">{{exchange}}</option>

@@ -1,0 +1,17 @@
+/*
+控制項狀態    真的 CSS 類別    偽的 CSS 類別
+Visited      ng-touched     ng-untouched
+Changed      ng-dirty       ng-pristine
+Valid        ng-valid       ng-invalid
+*/
+.stock-name .ng-valid,
+.stock-code .ng-pristine,
+.stock-price .ng-untouched {
+  background-color: green;
+}
+
+.stock-name .ng-invalid,
+.stock-code .ng-dirty,
+.stock-price .ng-touched {
+  background-color: pink;
+}
