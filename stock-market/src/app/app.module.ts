@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 // 匯入新建構的 stock-item 元件
 import { StockItemComponent } from './stock/stock-item/stock-item.component';
 import { StockCreateComponent } from './stock/stock-create/stock-create.component';
+import { StockListComponent } from './stock/stock-list/stock-list.component';
 
 // NgModule 這個 TypeScript 標記指出此類別定義為一個 Angular 模組
 @NgModule({
@@ -14,7 +15,8 @@ import { StockCreateComponent } from './stock/stock-create/stock-create.componen
     AppComponent,
     // 將新元件加入 declarations
     StockItemComponent,
-    StockCreateComponent
+    StockCreateComponent,
+    StockListComponent
   ],
   // 匯入其他 Angular 應用程式與函式庫模組
   imports: [
