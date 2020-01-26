@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from "@angular/forms";
 
 import { AppComponent } from './app.component';
 // 匯入新建構的 stock-item 元件
@@ -17,7 +18,8 @@ import { StockCreateComponent } from './stock/stock-create/stock-create.componen
   ],
   // 匯入其他 Angular 應用程式與函式庫模組
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule
   ],
   providers: [],
   // 啟動應用程式的進入元件

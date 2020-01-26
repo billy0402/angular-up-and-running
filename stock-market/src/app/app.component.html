@@ -1,4 +1,4 @@
-<div style="text-align: center">
+<div class="app-container">
   <h1>
     <!-- 資料連結的標題 -->
     Welcome to {{title}}!
@@ -10,13 +10,10 @@
     <button (click)="testMethod()">With Button 1</button>
   </app-stock-item>
 
-  <app-stock-item [stock]="stockObj"
-                  (toggleFavorite)="onToggleFavorite($event)">
-    No Button for you!
-  </app-stock-item>
-
   <div>
     <button (click)="changeStockObject()">Change Stock</button>
     <button (click)="changeStockPrice()">Change Price</button>
   </div>
+
+  <app-stock-create></app-stock-create>
 </div>

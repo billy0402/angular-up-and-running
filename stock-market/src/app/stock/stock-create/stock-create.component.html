@@ -1,1 +1,24 @@
-<p>stock-create works!</p>
+<h2>Create Stock Form</h2>
+
+<div class="form-group">
+  <form>
+    <div class="stock-name">
+      <!-- 替代 ngModel: 事件與屬性連結 -->
+      <!--
+      <input type="text"
+             placeholder="Stock Name"
+             [value]="stock.name"
+             (input)="stock.name=$event.target.value">
+      -->
+      <input type="text"
+             placeholder="Stock Name"
+             name="stockName"
+             [(ngModel)]="stock.name">
+      <!-- [ngModel]="stock.name" 資料連結 -->
+      <!-- (ngModelChange)="stock.name=$event" 事件連結 -->
+    </div>
+  </form>
+  <button (click)="stock.name='test'">Reset stock name</button>
+</div>
+
+<h4>Stock Name is {{stock.name}}</h4>
