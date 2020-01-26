@@ -1,24 +1,53 @@
 <h2>Create Stock Form</h2>
 
 <div class="form-group">
-  <form>
+  <!-- 透過 ngSubmit 事件處理程序，處理表單提交 -->
+  <form (ngSubmit)="createStock()">
     <div class="stock-name">
-      <!-- 替代 ngModel: 事件與屬性連結 -->
-      <!--
-      <input type="text"
-             placeholder="Stock Name"
-             [value]="stock.name"
-             (input)="stock.name=$event.target.value">
-      -->
-      <input type="text"
-             placeholder="Stock Name"
-             name="stockName"
-             [(ngModel)]="stock.name">
-      <!-- [ngModel]="stock.name" 資料連結 -->
-      <!-- (ngModelChange)="stock.name=$event" 事件連結 -->
+      <input type="text" placeholder="Stock Name"
+             name="stockName" [(ngModel)]="stock.name">
     </div>
+    <div class="stock-code">
+      <input type="text" placeholder="Stock Code"
+             name="stockCode" [(ngModel)]="stock.code">
+    </div>
+    <div class="stock-price">
+      <!-- 展開版本的 ngModel，用於處理前後股價 -->
+      <input type="number" placeholder="Stock Price"
+             name="stockPrice" [ngModel]="stock.price"
+             (ngModelChange)="setStockPrice($event)">
+    </div>
+    <div class="stock-exchange">
+      <!-- 透過 ngModel 處理單選按鈕 -->
+      <!--
+      <div>
+        <input type="radio" name="stockExchange"
+               [(ngModel)]="stock.exchange" value="NYSE">NYSE
+      </div>
+      <div>
+        <input type="radio" name="stockExchange"
+               [(ngModel)]="stock.exchange" value="NASDAQ">NASDAQ
+      </div>
+      <div>
+        <input type="radio" name="stockExchange"
+               [(ngModel)]="stock.exchange" value="OTHER">OTHER
+      </div>
+      -->
+      <select name="stockExchange" [(ngModel)]="stock.exchange">
+        <option *ngFor="let exchange of exchanges"
+                [ngValue]="exchange">{{exchange}}</option>
+      </select>
+    </div>
+    <div class="stock-confirm">
+      <!-- 透過 ngModel 處理核選按鈕 -->
+      <input type="checkbox" name="stockConfirm"
+             [(ngModel)]="confirmed">
+      I confirm that the information provided above is accurate!
+    </div>
+    <!-- 未勾選時，關閉表單按鈕 -->
+    <button type="submit" [disabled]="!confirmed">Create</button>
   </form>
-  <button (click)="stock.name='test'">Reset stock name</button>
 </div>
 
-<h4>Stock Name is {{stock.name}}</h4>
+<h4>Stock is {{stock | json}}</h4>
+<h4>Data has been confirmed: {{confirmed}}</h4>

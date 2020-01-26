@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     // 初始化每個欄位的值
-    this.stockObj = new Stock(`Test Stock Company - ${this.counter++}`, 'TSC', 85, 80);
+    this.stockObj = new Stock(`Test Stock Company - ${this.counter++}`, 'TSC', 85, 80, 'NASDAQ');
   }
 
   onToggleFavorite(stock: Stock) {
@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
 
   changeStockObject() {
     // 這會修改股票項目元件中的值，因為我們建構股票輸入的新參考
-    this.stockObj = new Stock(`Test Stock Company - ${this.counter++}`, 'TSC', 85, 80);
+    this.stockObj = new Stock(`Test Stock Company - ${this.counter++}`, 'TSC', 85, 80, 'NASDAQ');
   }
 
   changeStockPrice() {
