@@ -10,16 +10,46 @@
              placeholder="Stock Name"
              formControlName="name">
     </div>
+    <!-- 透過群組存取個別控制項元素的有效值 -->
+    <div *ngIf="name.invalid &&
+               (name.dirty ||
+                name.touched)">
+      Stock name is required
+    </div>
+
     <div class="stock-code">
       <input type="text"
              placeholder="Stock Code"
              formControlName="code">
     </div>
+    <div *ngIf="code.invalid &&
+               (code.dirty ||
+                code.touched)">
+      <!-- 檢查表單元素個別檢驗程序的狀態 -->
+      <div *ngIf="code.errors.required">
+        Stock code is required
+      </div>
+      <div *ngIf="code.errors.minlength">
+        Stock Code must be at least 2 characters
+      </div>
+    </div>
+
     <div class="stock-price">
       <input type="number"
              placeholder="Stock Price"
              formControlName="price">
     </div>
+    <div *ngIf="price.invalid &&
+               (price.dirty ||
+                price.touched)">
+      <div *ngIf="price.errors.required">
+        Stock price is required
+      </div>
+      <div *ngIf="price.errors.min">
+        Stock Price must be positive
+      </div>
+    </div>
+
     <button type="submit">Submit</button>
   </form>
 </div>

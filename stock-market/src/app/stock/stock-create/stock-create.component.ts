@@ -16,6 +16,18 @@ export class StockCreateComponent {
     this.createForm();
   }
 
+  get name() {
+    return this.stockForm.get('name');
+  }
+
+  get code() {
+    return this.stockForm.get('code');
+  }
+
+  get price() {
+    return this.stockForm.get('price');
+  }
+
   createForm() {
     // 使用注入的 FormBuilder 建構 FormGroup
     this.stockForm = this.formBuilder.group({
