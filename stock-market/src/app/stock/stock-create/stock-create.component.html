@@ -1,46 +1,16 @@
 <h2>Create Stock Form</h2>
 
 <div class="form-group">
-  <!-- 透過 ngSubmit 事件處理程序，處理表單提交 -->
-  <!-- 表單模型層級的模板參考變數 stockForm -->
-  <form (ngSubmit)="createStock(stockForm)" #stockForm="ngForm">
-    <div ngModelGroup="stock">
-      <div class="stock-name">
-        <input type="text"
-               placeholder="Stock Name"
-               name="name"
-               ngModel
-               required>
-      </div>
-
-      <div class="stock-code">
-        <input type="text"
-               placeholder="Stock Code"
-               name="code"
-               ngModel
-               required
-               minlength="2">
-      </div>
-
-      <div class="stock-price">
-        <input type="number"
-               placeholder="Stock Price"
-               name="price"
-               ngModel
-               required>
-      </div>
-
-      <div class="stock-exchange">
-        <select name="exchange" ngModel>
-          <option *ngFor="let exchange of exchanges"
-                  [ngValue]="exchange">{{exchange}}</option>
-        </select>
-      </div>
-
-      <button type="submit">Create</button>
-    </div>
-  </form>
+  <div class="stock-name">
+    <!-- 使用表單控制項連結，而非 ngModel -->
+    <input type="text"
+           placeholder="Stock Name"
+           name="stockName"
+           [formControl]="nameControl">
+  </div>
+  <button (click)="onSubmit()">Submit</button>
 </div>
 
-<h4>Stock is {{stock | json}}</h4>
-<h4>Data has been confirmed: {{confirmed}}</h4>
+<!-- 存取表單欄位的目前的值與狀態 -->
+<h4>Form Control value: {{nameControl.value | json}}</h4>
+<h4>Form Control status: {{nameControl.status | json}}</h4>
