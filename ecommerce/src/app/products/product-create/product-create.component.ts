@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 import {Product} from '../../model/product';
+import {ProductService} from '../../services/product.service';
 
 @Component({
   selector: 'app-product-create',
@@ -10,13 +11,12 @@ import {Product} from '../../model/product';
 })
 export class ProductCreateComponent {
 
-  public product: Product;
   public productForm: FormGroup;
   public message: string = '';
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private productService: ProductService,
+              private formBuilder: FormBuilder) {
     this.createForm();
-    this.product = new Product(1, 'Test', 0, '');
   }
 
   get name() {
@@ -48,8 +48,10 @@ export class ProductCreateComponent {
     }
 
     console.log('Product From', this.productForm.value);
-    this.product = {...this.productForm.value};
-    console.log('Creating product', this.product);
+    const newProduct: Product = this.productForm.value;
+    this.productService.createProduct(newProduct);
+    this.productForm.reset({name: '', price: 0, imageUrl: ''});
+    console.log('Creating product', newProduct);
   }
 
 }
