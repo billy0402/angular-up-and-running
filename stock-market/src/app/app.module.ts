@@ -8,6 +8,8 @@ import { StockItemComponent } from './stock/stock-item/stock-item.component';
 import { StockCreateComponent } from './stock/stock-create/stock-create.component';
 import { StockListComponent } from './stock/stock-list/stock-list.component';
 
+import { StockService } from './services/stock.service';
+
 // NgModule 這個 TypeScript 標記指出此類別定義為一個 Angular 模組
 @NgModule({
   // 宣告應用程式中使用的 HTML 元件與指示
@@ -23,7 +25,10 @@ import { StockListComponent } from './stock/stock-list/stock-list.component';
     BrowserModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  // 建構服務的單一實例
+  providers: [
+    StockService
+  ],
   // 啟動應用程式的進入元件
   bootstrap: [AppComponent]
 })

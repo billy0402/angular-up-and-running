@@ -3,7 +3,7 @@
 ## environment
 
 - [macOS 10.15.2](https://www.apple.com/tw/macos/catalina/)
-- [WebStorm](https://www.jetbrains.com/webstorm/)
+- [WebStorm 2019.3.1](https://www.jetbrains.com/webstorm/)
 - nvm 0.35.2, node 12.14.0, npm 6.13.4
 - Angular CLI 8.3.23
 
@@ -61,6 +61,9 @@ $ ng generate component <component name>
 
 # 產生類別骨架
 $ ng generate class <class name>
+
+# 產生服務骨架
+$ ng generate service <service name>
 
 # 執行測試
 $ ng test
