@@ -26,10 +26,23 @@ export class StockCreateComponent {
               public messageService: MessageService,
               private formBuilder: FormBuilder) {
     this.createForm();
-    // 以一些預設值初始化股票模型
-    this.stock = new Stock('', '', 0, 0, this.exchanges[1]);
+    // 呼叫 initializeStock 以建構股票實例
+    this.initializeStock();
     // 在元件中加入 MessageService 的初始值
     this.messageService.message = 'Component Level: Hello Message Service!';
+  }
+
+  // 定義 initializeStock 方法供重複使用
+  initializeStock() {
+    this.stock = {
+      name: '',
+      code: '',
+      price: 0,
+      previousPrice: 0,
+      exchange: this.exchanges[1],
+      favorite: false,
+      notablePeople: []
+    };
   }
 
   get name() {
@@ -59,7 +72,7 @@ export class StockCreateComponent {
       exchange: this.exchanges[1],
       // notablePeople 初始化為 FormArray 實例
       notablePeople: this.formBuilder.array([])
-    })
+    });
   }
 
   // 將新的 FormGroup 實例加入 FormArray
@@ -82,19 +95,21 @@ export class StockCreateComponent {
       return;
     }
 
-    const newStock: Stock = Object.assign(Object.create(this.stock), this.stockForm.value);
-    newStock.previousPrice = newStock.price;
+    this.stock = {...this.stockForm.value};
+    this.stock.previousPrice = this.stock.price;
 
     // 提交表單時，呼叫 stockService.createStock
     // 處理建構股票時的成功或失敗
     // 兩種建構狀況均使用 MessageService
-    this.stockService.createStock(newStock)
+    this.stockService.createStock(this.stock)
       // 訂閱可觀察
       .subscribe((result: any) => {
         this.messageService.message = result.msg;
+        // 成功建構股票後，使用 initializeStock
+        this.initializeStock();
         this.stockForm.reset({name: null, code: null, price: 0, exchange: 'NASDAQ', notablePeople: []});
       }, (err) => {
-        this.messageService.message = err.msg;
+        this.messageService.message = err.error.msg;
       });
   }
 

@@ -23,10 +23,4 @@ export class StockListComponent implements OnInit {
     this.stocks$ = this.stockService.getStocks();
   }
 
-  onToggleFavorite(stock: Stock) {
-    console.log('Favorite for stock', stock, 'was triggered');
-    // 使用 StockService 切換最愛狀態
-    this.stockService.toggleFavorite(stock);
-  }
-
 }

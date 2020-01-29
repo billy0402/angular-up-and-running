@@ -1,20 +1,13 @@
-export class Stock {
+export interface Stock {
 
   // 定義從 HTML 存取的各種欄位
-  favorite: boolean = false;
+  name: string;
+  code: string;
+  price: number;
+  previousPrice: number;
+  exchange: string;
+  favorite: boolean;
   notablePeople: Array<Person>;
-
-  constructor(public name: string,
-              public code: string,
-              public price: number,
-              public previousPrice: number,
-              public exchange: string) {
-    this.notablePeople = [];
-  }
-
-  isPositiveChange(): boolean {
-    return this.price >= this.previousPrice;
-  }
 
 }
 
