@@ -26,4 +26,8 @@ export class StockService {
     });
   }
 
+  makeFailingCall() {
+    return this._http.get('/api/fail');
+  }
+
 }

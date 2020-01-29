@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from "@angular/forms";
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 // 匯入新建構的 stock-item 元件
@@ -12,6 +12,7 @@ import { StockListComponent } from './stock/stock-list/stock-list.component';
 import { StockService } from './services/stock.service';
 import { MessageService } from './services/message.service';
 import { AuthService } from './services/auth.service';
+import { StockAppInterceptor } from './services/stock-app.interceptor';
 
 // NgModule 這個 TypeScript 標記指出此類別定義為一個 Angular 模組
 @NgModule({
@@ -33,7 +34,15 @@ import { AuthService } from './services/auth.service';
   providers: [
     StockService,
     MessageService,
-    AuthService
+    AuthService,
+    {
+      // 提供什麼
+      provide: HTTP_INTERCEPTORS,
+      // 如何提供
+      useClass: StockAppInterceptor,
+      // 指出是個攔截程序陣列
+      multi: true
+    }
   ],
   // 啟動應用程式的進入元件
   bootstrap: [AppComponent]
