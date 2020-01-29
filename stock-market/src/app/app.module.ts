@@ -9,6 +9,7 @@ import { StockCreateComponent } from './stock/stock-create/stock-create.componen
 import { StockListComponent } from './stock/stock-list/stock-list.component';
 
 import { StockService } from './services/stock.service';
+import { MessageService } from './services/message.service';
 
 // NgModule 這個 TypeScript 標記指出此類別定義為一個 Angular 模組
 @NgModule({
@@ -27,7 +28,8 @@ import { StockService } from './services/stock.service';
   ],
   // 建構服務的單一實例
   providers: [
-    StockService
+    StockService,
+    MessageService
   ],
   // 啟動應用程式的進入元件
   bootstrap: [AppComponent]
