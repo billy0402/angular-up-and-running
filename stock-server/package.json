@@ -1,0 +1,16 @@
+{
+  "name": "stock-server",
+  "version": "1.0.0",
+  "description": "Server for the examples for Angular Up & Running book",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Billy Huang (10646003@ntub.edu.tw)",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {}
+}
