@@ -12,8 +12,8 @@ export class StockService {
   }
 
   // 將 getStocks 回傳型別改為可觀察
-  getStocks(): Observable<Stock[]> {
-    return this._http.get<Stock[]>('/api/stock');
+  getStocks(query: string): Observable<Stock[]> {
+    return this._http.get<Stock[]>(`/api/stock?q=${query}`);
   }
 
   createStock(stock: Stock): Observable<any> {
