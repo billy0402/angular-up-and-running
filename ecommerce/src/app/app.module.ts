@@ -7,6 +7,8 @@ import { ProductItemComponent } from './products/product-item/product-item.compo
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { ProductCreateComponent } from './products/product-create/product-create.component';
 
+import { ProductService } from './services/product.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +20,9 @@ import { ProductCreateComponent } from './products/product-create/product-create
     BrowserModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    ProductService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
