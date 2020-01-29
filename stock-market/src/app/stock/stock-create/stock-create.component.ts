@@ -86,15 +86,16 @@ export class StockCreateComponent {
     newStock.previousPrice = newStock.price;
 
     // 提交表單時，呼叫 stockService.createStock
-    let created = this.stockService.createStock(newStock);
     // 處理建構股票時的成功或失敗
     // 兩種建構狀況均使用 MessageService
-    if (created) {
-      this.messageService.message = `Successfully created stock with stock code: ${newStock.code}.`;
-      this.stockForm.reset({name: null, code: null, price: 0, exchange: 'NASDAQ', notablePeople: []});
-    } else {
-      this.messageService.message = `Stock with stock code: ${this.stock.code} already exists.`;
-    }
+    this.stockService.createStock(newStock)
+      // 訂閱可觀察
+      .subscribe((result: any) => {
+        this.messageService.message = result.msg;
+        this.stockForm.reset({name: null, code: null, price: 0, exchange: 'NASDAQ', notablePeople: []});
+      }, (err) => {
+        this.messageService.message = err.msg;
+      });
   }
 
   resetForm() {

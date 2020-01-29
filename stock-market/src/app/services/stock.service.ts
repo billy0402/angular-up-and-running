@@ -1,4 +1,6 @@
 import {Injectable} from '@angular/core';
+// 從 rxjs 匯入 Observable. Observable API 核心方法 (例如throw 與 of)
+import {Observable, throwError as ObservableThrow, of as ObservableOf} from 'rxjs';
 
 import {Stock} from '../model/stock';
 
@@ -15,27 +17,32 @@ export class StockService {
     ];
   }
 
-  getStocks(): Stock[] {
-    return this.stocks;
+  // 將 getStocks 回傳型別改為可觀察
+  getStocks(): Observable<Stock[]> {
+    // 以假資料回傳可觀察
+    return ObservableOf(this.stocks);
   }
 
   foundStock(stock: Stock) {
     return this.stocks.find(each => each.code === stock.code);
   }
 
-  createStock(stock: Stock) {
+  createStock(stock: Stock): Observable<any> {
     let foundStock = this.foundStock(stock);
     if (foundStock) {
-      return false;
+      // 向觀察者拋出例外
+      return ObservableThrow({msg: `Stock with code ${stock.code} already exists.`})
     }
 
     this.stocks.push(stock);
-    return true;
+    return ObservableOf({msg: `Stock with code ${stock.code} successfully created.`});
   }
 
-  toggleFavorite(stock: Stock) {
+  toggleFavorite(stock: Stock): Observable<Stock> {
     let foundStock = this.foundStock(stock);
     foundStock.favorite = !foundStock.favorite;
+
+    return ObservableOf(foundStock);
   }
 
 }
