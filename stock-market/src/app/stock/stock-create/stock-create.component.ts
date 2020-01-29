@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 import {Stock} from '../../model/stock';
+import {StockService} from '../../services/stock.service';
 
 @Component({
   selector: 'app-stock-create',
@@ -15,12 +16,16 @@ export class StockCreateComponent {
   // 宣告時不再初始化 FormGroup
   public stockForm: FormGroup;
   public exchanges: string[] = ['NYSE', 'NASDAQ', 'OTHER'];
+  public confirmed: boolean = false;
+  // 加入顯示訊息的 message 物件
+  public message: string = null;
 
-  // 將 FormBuilder 實例注入建構元
-  constructor(private formBuilder: FormBuilder) {
+  // 將 StockService. FormBuilder 實例注入建構元
+  constructor(private stockService: StockService,
+              private formBuilder: FormBuilder) {
     this.createForm();
     // 以一些預設值初始化股票模型
-    this.stock = new Stock('Test', 'TST', 20, 10, this.exchanges[1]);
+    this.stock = new Stock('', '', 0, 0, this.exchanges[1]);
   }
 
   get name() {
@@ -67,8 +72,24 @@ export class StockCreateComponent {
   }
 
   onSubmit() {
-    this.stock = {...this.stockForm.value};
-    console.log('Saving stock', this.stock);
+    if (this.stockForm.invalid) {
+      console.error('Stock form is an invalid state');
+      this.message = 'Please correct all errors and resubmit the form.';
+      return;
+    }
+
+    const newStock: Stock = Object.assign(Object.create(this.stock), this.stockForm.value);
+    newStock.previousPrice = newStock.price;
+
+    // 提交表單時，呼叫 stockService.createStock
+    let created = this.stockService.createStock(newStock);
+    // 處理建構股票時的成功或失敗
+    if (created) {
+      this.message = `Successfully created stock with stock code: ${newStock.code}.`;
+      this.stockForm.reset({name: null, code: null, price: 0, exchange: 'NASDAQ', notablePeople: []});
+    } else {
+      this.message = `Stock with stock code: ${this.stock.code} already exists.`;
+    }
   }
 
   resetForm() {

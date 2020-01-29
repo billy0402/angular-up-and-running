@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 
 import {Stock} from '../../model/stock';
+import {StockService} from '../../services/stock.service';
 
 @Component({
   selector: 'app-stock-list',
@@ -11,20 +12,19 @@ export class StockListComponent implements OnInit {
 
   public stocks: Stock[];
 
-  constructor() {
+  // 將 StockService 注入元件
+  constructor(private stockService: StockService) {
   }
 
   ngOnInit() {
-    this.stocks = [
-      new Stock('Test Stock Company', 'TSC', 85, 80, 'NASDAQ'),
-      new Stock('Second Stock Company', 'SSC', 10, 20, 'NYSE'),
-      new Stock('Last Stock Company', 'LSC', 876, 765, 'NYSE')
-    ];
+    // 使用 StockService 取得股票清單
+    this.stocks = this.stockService.getStocks();
   }
 
   onToggleFavorite(stock: Stock) {
     console.log('Favorite for stock', stock, 'was triggered');
-    stock.favorite = !stock.favorite;
+    // 使用 StockService 切換最愛狀態
+    this.stockService.toggleFavorite(stock);
   }
 
 }

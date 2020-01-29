@@ -1,5 +1,8 @@
 <h2>Create Stock Form</h2>
 
+<!-- 若有訊息則顯示 -->
+<div *ngIf="message">{{message}}</div>
+
 <div class="form-group">
   <!-- 連結 formGroup，而非 formControl -->
   <form [formGroup]="stockForm" (ngSubmit)="onSubmit()">
@@ -81,11 +84,17 @@
       </div>
     </div>
 
+    <div class="stock-confirm">
+      <input type="checkbox"
+             (change)="confirmed=$event.target.checked">
+      I confirm that the information provided above is accurate!
+    </div>
+
     <button type="button"
             (click)="addNotablePerson()">
       Add Notable Person
     </button>
-    <button type="submit">Submit</button>
+    <button type="submit" [disabled]="!confirmed">Submit</button>
     <button type="button"
             (click)="resetForm()">
       Reset

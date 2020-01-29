@@ -1,9 +1,41 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
-})
+import {Stock} from '../model/stock';
+
+@Injectable()
 export class StockService {
 
-  constructor() { }
+  private stocks: Stock[];
+
+  constructor() {
+    this.stocks = [
+      new Stock('Test Stock Company', 'TSC', 85, 80, 'NASDAQ'),
+      new Stock('Second Stock Company', 'SSC', 10, 20, 'NYSE'),
+      new Stock('Last Stock Company', 'LSC', 876, 765, 'NYSE')
+    ];
+  }
+
+  getStocks(): Stock[] {
+    return this.stocks;
+  }
+
+  foundStock(stock: Stock) {
+    return this.stocks.find(each => each.code === stock.code);
+  }
+
+  createStock(stock: Stock) {
+    let foundStock = this.foundStock(stock);
+    if (foundStock) {
+      return false;
+    }
+
+    this.stocks.push(stock);
+    return true;
+  }
+
+  toggleFavorite(stock: Stock) {
+    let foundStock = this.foundStock(stock);
+    foundStock.favorite = !foundStock.favorite;
+  }
+
 }
