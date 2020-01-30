@@ -1,6 +1,6 @@
 <!-- NgFor: 建構多個元素 -->
 <!-- trackBy: 提供 NgFor 使用函式回傳值而非物件參考識別，來決定如何識別個別項目，確保會重新載入所有項目 -->
-<div class="stock-container">
+<div class="stock-container" routerLink="/stock/{{stock.code}}">
   <!-- 單向綁定 -->
   <div class="name">{{stock.name + ' (' + stock.code + ')'}}</div>
   <div class="exchange">{{stock.exchange}}</div>
