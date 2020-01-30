@@ -5,6 +5,7 @@ import {LoginComponent} from './user/login/login.component';
 import {RegisterComponent} from './user/register/register.component';
 import {StockListComponent} from './stock/stock-list/stock-list.component';
 import {StockCreateComponent} from './stock/stock-create/stock-create.component';
+import {StockDetailComponent} from './stock/stock-detail/stock-detail.component';
 
 // 宣告應用程式的路徑陣列
 const appRoutes = [
@@ -15,6 +16,7 @@ const appRoutes = [
   {path: 'register', component: RegisterComponent},
   {path: 'stock/list', component: StockListComponent},
   {path: 'stock/create', component: StockCreateComponent},
+  {path: 'stock/:code', component: StockDetailComponent},
   // 加入捕捉全部不相符路徑重新導向到 Register 頁
   // pathMatch 預設為 prefix，檢查 URL 開頭與 path 是否相符
   {path: '**', redirectTo: '/register'}

@@ -1,1 +1,6 @@
-<p>stock-detail works!</p>
+<div class="stock-container">
+  <div class="name">{{stock.name + ' (' + stock.code + ')'}}</div>
+  <div class="exchange">{{stock.exchange}}</div>
+  <div class="price"
+       [ngClass]="getPriceClass()">$ {{stock.price}}</div>
+</div>
