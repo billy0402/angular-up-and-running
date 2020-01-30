@@ -3,7 +3,31 @@
     <!-- 資料連結的標題 -->
     Welcome to {{title}}!
   </h1>
+
   <h3>App Level: {{messageService.message}}</h3>
-  <app-stock-list></app-stock-list>
-  <app-stock-create></app-stock-create>
+
+  <div class="links">
+    <span>
+      <a routerLink="/login" routerLinkActive="active">
+        Login
+      </a>
+    </span>
+    <span>
+      <a routerLink="/register" routerLinkActive="active">
+        Register
+      </a>
+    </span>
+    <span>
+      <a routerLink="/stock/list" routerLinkActive="active">
+        Stock List
+      </a>
+    </span>
+    <span>
+      <a routerLink="/stock/create" routerLinkActive="active">
+        Stock Create
+      </a>
+    </span>
+  </div>
+
+  <router-outlet></router-outlet>
 </div>
