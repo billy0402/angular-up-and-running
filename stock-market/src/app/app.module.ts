@@ -19,6 +19,7 @@ import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
 import { StockAppInterceptor } from './services/stock-app.interceptor';
 import { AuthGuard } from './guards/auth.guard';
+import { StockCreateDeactivateGuard } from './guards/stock-create-deactivate.guard';
 
 // NgModule 這個 TypeScript 標記指出此類別定義為一個 Angular 模組
 @NgModule({
@@ -48,6 +49,7 @@ import { AuthGuard } from './guards/auth.guard';
     AuthService,
     UserService,
     AuthGuard,
+    StockCreateDeactivateGuard,
     {
       // 提供什麼
       provide: HTTP_INTERCEPTORS,
