@@ -1,5 +1,5 @@
 <div class="product-item" [class.sale]="product.isOnSale">
-  <div class="image"><img [src]="getProductImageUrl(product.imageUrl)" [alt]="product.name"></div>
+  <div class="image"><img [src]="product.imageUrl" [alt]="product.name"></div>
   <div class="details">
     <div class="name">{{product.name}}</div>
     <div class="price">NT$ {{product.price}}</div>

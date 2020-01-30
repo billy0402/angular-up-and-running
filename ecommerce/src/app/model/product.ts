@@ -1,12 +1,10 @@
-export class Product {
+export interface Product {
 
-  public quantityInCart: number = 0;
-
-  constructor(public id: number,
-              public name: string,
-              public price: number,
-              public imageUrl: string,
-              public isOnSale: boolean = false) {
-  }
+  id: number;
+  name: string;
+  price: number;
+  imageUrl: string;
+  isOnSale: boolean;
+  quantityInCart: number;
 
 }

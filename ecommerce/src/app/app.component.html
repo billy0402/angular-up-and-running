@@ -2,6 +2,6 @@
   <h1>
     Welcome to {{title}}!
   </h1>
-  <app-product-list></app-product-list>
-  <app-product-create></app-product-create>
+  <app-product-list #productList></app-product-list>
+  <app-product-create (productCreated)="productList.onCreate()"></app-product-create>
 </div>

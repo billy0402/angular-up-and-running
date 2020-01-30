@@ -20,10 +20,6 @@ export class ProductItemComponent implements OnInit {
   ngOnInit() {
   }
 
-  getProductImageUrl(url: String) {
-    return `https://www.apple.com/v/mac/compare/m/images/overview/${url}.jpg`
-  }
-
   incrementInCart() {
     this.quantityChange.emit({product: this.product, changeInQuantity: 1});
   }

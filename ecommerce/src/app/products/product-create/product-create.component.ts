@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 import {Product} from '../../model/product';
@@ -11,6 +11,7 @@ import {ProductService} from '../../services/product.service';
 })
 export class ProductCreateComponent {
 
+  @Output() private productCreated: EventEmitter<void> = new EventEmitter();
   public productForm: FormGroup;
   public message: string = '';
 
@@ -47,11 +48,20 @@ export class ProductCreateComponent {
       return;
     }
 
-    console.log('Product From', this.productForm.value);
-    const newProduct: Product = this.productForm.value;
-    this.productService.createProduct(newProduct);
-    this.productForm.reset({name: '', price: 0, imageUrl: ''});
-    console.log('Creating product', newProduct);
+    const product: Product = {...this.productForm.value};
+    console.log('Product From', product);
+
+    this.productService.createProduct(product)
+      .subscribe((result: any) => {
+          console.log('Creating product', product);
+          this.message = 'Product successfully created.';
+          console.log('Triggered event emitter');
+          this.productCreated.next();
+          this.productForm.reset({name: '', price: 0, imageUrl: ''});
+        },
+        (err: any) => {
+          this.message = 'Unable to create product, please try again.';
+        });
   }
 
 }
