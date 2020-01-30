@@ -18,6 +18,7 @@ import { MessageService } from './services/message.service';
 import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
 import { StockAppInterceptor } from './services/stock-app.interceptor';
+import { AuthGuard } from './guards/auth.guard';
 
 // NgModule 這個 TypeScript 標記指出此類別定義為一個 Angular 模組
 @NgModule({
@@ -46,6 +47,7 @@ import { StockAppInterceptor } from './services/stock-app.interceptor';
     MessageService,
     AuthService,
     UserService,
+    AuthGuard,
     {
       // 提供什麼
       provide: HTTP_INTERCEPTORS,
