@@ -5,9 +5,21 @@ import {Injectable} from '@angular/core';
 })
 export class AuthService {
 
-  public authToken: string;
+  private _token: string = null;
 
   constructor() {
+  }
+
+  set token(token: string) {
+    this._token = token;
+  }
+
+  get token(): string {
+    return this._token;
+  }
+
+  isLoggedIn(): boolean {
+    return this._token != null;
   }
 
 }

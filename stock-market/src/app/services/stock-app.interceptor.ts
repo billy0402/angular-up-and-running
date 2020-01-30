@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {tap} from "rxjs/operators";
 
 import {AuthService} from './auth.service';
 
@@ -17,9 +16,10 @@ export class StockAppInterceptor implements HttpInterceptor {
     console.log(`Making a request to ${req.url}`);
 
     // 檢查伺服器中的認證憑證
-    if (this.authService.authToken) {
+    if (this.authService.token) {
+      console.log(`Interceptor has token ${this.authService.token}`);
       const authRequest = req.clone({
-        headers: req.headers.set('Authorization', this.authService.authToken)
+        headers: req.headers.set('X-AUTH-HEADER', this.authService.token)
       });
       console.log('Making an authorized request');
       // 以額外的標頭改變請求為有認證的請求
@@ -27,10 +27,7 @@ export class StockAppInterceptor implements HttpInterceptor {
     }
 
     // 以請求呼叫 handle 以繼續鏈接
-    return next.handle(req).pipe(tap(
-      event => this.handleResponse(req, event),
-      error => this.handleError(req, error)
-    ));
+    return next.handle(req);
   }
 
   // 處理成功回應
