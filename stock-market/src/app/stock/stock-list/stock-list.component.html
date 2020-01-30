@@ -12,4 +12,8 @@
   <app-stock-item *ngFor="let stock of stocks$ | async;"
                   [stock]="stock">
   </app-stock-item>
+
+  <div class="pagination">
+    <button type="button" (click)="nextPage()">Next Page</button>
+  </div>
 </div>

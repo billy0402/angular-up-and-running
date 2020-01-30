@@ -30,7 +30,10 @@ export class LoginComponent implements OnInit {
         console.log('Successfully logged in');
         this.messageService.message = res.msg;
         // 使用 Router 導向某個路徑 (絕對路徑)
-        this.router.navigate(['stock', 'list']);
+        this.router.navigate(['stock', 'list'], {
+          // 傳入查詢變數作為瀏覽請求的一部分
+          queryParams: {page: 1}
+        });
       }, (err) => {
         console.error('Error logging in', err);
         this.messageService.message = err.error.msg;
