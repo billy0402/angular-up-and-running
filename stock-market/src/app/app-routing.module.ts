@@ -9,6 +9,7 @@ import {StockDetailComponent} from './stock/stock-detail/stock-detail.component'
 
 import {AuthGuard} from './guards/auth.guard';
 import {StockCreateDeactivateGuard} from './guards/stock-create-deactivate.guard';
+import {StockLoadResolverService} from './resolver/stock-load-resolver.service';
 
 // 宣告應用程式的路徑陣列
 const appRoutes = [
@@ -22,7 +23,10 @@ const appRoutes = [
     path: 'stock/create', component: StockCreateComponent,
     canActivate: [AuthGuard], canDeactivate: [StockCreateDeactivateGuard]
   },
-  {path: 'stock/:code', component: StockDetailComponent, canActivate: [AuthGuard]},
+  {
+    path: 'stock/:code', component: StockDetailComponent, canActivate: [AuthGuard],
+    resolve: {stock: StockLoadResolverService}
+  },
   // 加入捕捉全部不相符路徑重新導向到 Register 頁
   // pathMatch 預設為 prefix，檢查 URL 開頭與 path 是否相符
   {path: '**', redirectTo: '/register'}

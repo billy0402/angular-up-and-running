@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 
 import {Stock} from '../../model/stock';
-import {StockService} from '../../services/stock.service';
 
 @Component({
   selector: 'app-stock-detail',
@@ -14,15 +13,13 @@ export class StockDetailComponent implements OnInit {
   public stock: Stock;
 
   // 將作用中的路徑注入建構元
-  constructor(private stockService: StockService,
-              private _route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    // 使用作用中的路徑從 URL 讀取代號
-    const stockCode = this._route.snapshot.paramMap.get('code');
-    this.stockService.getStock(stockCode)
-      .subscribe(stock => this.stock = stock);
+    this.route.data.subscribe((data: { stock: Stock }) => {
+      this.stock = data.stock;
+    });
   }
 
   getPriceClass() {
