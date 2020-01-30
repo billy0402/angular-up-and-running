@@ -8,10 +8,14 @@ import { AppComponent } from './app.component';
 import { StockItemComponent } from './stock/stock-item/stock-item.component';
 import { StockCreateComponent } from './stock/stock-create/stock-create.component';
 import { StockListComponent } from './stock/stock-list/stock-list.component';
+import { StockDetailComponent } from './stock/stock-detail/stock-detail.component';
+import { LoginComponent } from './user/login/login.component';
+import { RegisterComponent } from './user/register/register.component';
 
 import { StockService } from './services/stock.service';
 import { MessageService } from './services/message.service';
 import { AuthService } from './services/auth.service';
+import { UserService } from './services/user.service';
 
 // NgModule 這個 TypeScript 標記指出此類別定義為一個 Angular 模組
 @NgModule({
@@ -21,7 +25,10 @@ import { AuthService } from './services/auth.service';
     // 將新元件加入 declarations
     StockItemComponent,
     StockCreateComponent,
-    StockListComponent
+    StockListComponent,
+    StockDetailComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   // 匯入其他 Angular 應用程式與函式庫模組
   imports: [
@@ -34,7 +41,8 @@ import { AuthService } from './services/auth.service';
   providers: [
     StockService,
     MessageService,
-    AuthService
+    AuthService,
+    UserService
   ],
   // 啟動應用程式的進入元件
   bootstrap: [AppComponent]
