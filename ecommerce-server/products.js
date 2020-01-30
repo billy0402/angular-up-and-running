@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var jwt = require('jsonwebtoken');
 
 const products = [
     {
@@ -8,7 +9,8 @@ const products = [
         imageUrl: 'https://www.apple.com/v/mac/compare/m/images/overview/compare_macbook_air_retina_spacegray__era7vec2t6qa_large_2x.jpg',
         price: 36900,
         isOnSale: false,
-        quantityInCart: 0
+        quantityInCart: 0,
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae et leo duis ut diam quam. Morbi blandit cursus risus at ultrices mi tempus imperdiet nulla.'
     },
     {
         id: 2,
@@ -16,7 +18,8 @@ const products = [
         imageUrl: 'https://www.apple.com/v/mac/compare/m/images/overview/compare_macbook_pro_13_spacegray__jy60myikwne6_large_2x.jpg',
         price: 42900,
         isOnSale: false,
-        quantityInCart: 0
+        quantityInCart: 0,
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae et leo duis ut diam quam. Morbi blandit cursus risus at ultrices mi tempus imperdiet nulla.'
     },
     {
         id: 3,
@@ -24,9 +27,19 @@ const products = [
         imageUrl: 'https://www.apple.com/v/mac/compare/m/images/overview/compare_macbook_pro_16_spacegray__dx8anpw8a9qq_large_2x.jpg',
         price: 77900,
         isOnSale: true,
-        quantityInCart: 0
+        quantityInCart: 0,
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet risus nullam eget felis eget nunc lobortis mattis. Nunc lobortis mattis aliquam faucibus purus in massa. Adipiscing bibendum est ultricies integer. Sit amet cursus sit amet dictum sit amet. Ullamcorper a lacus vestibulum sed. Odio euismod lacinia at quis risus sed vulputate odio. Aenean vel elit scelerisque mauris pellentesque. In fermentum et sollicitudin ac. Tempus imperdiet nulla malesuada pellentesque. Ultrices sagittis orci a scelerisque purus semper eget. Eu tincidunt tortor aliquam nulla facilisi cras. Aliquet risus feugiat in ante metus dictum at tempor commodo. Est placerat in egestas erat imperdiet sed euismod. Sem et tortor consequat id porta nibh. Mauris vitae ultricies leo integer malesuada nunc vel risus. Lectus sit amet est placerat in. Convallis aenean et tortor at risus. Velit egestas dui id ornare arcu odio ut sem. Non enim praesent elementum facilisis leo.'
     }
 ];
+
+var checkIfLoggedIn = (req, res, next) => {
+    var token = req.get('X-AUTH-HEADER');
+    var user = jwt.decode(token);
+    if (user && user.user) {
+        return next();
+    }
+    return res.status(403).json({msg: 'Please login to access this information'});
+};
 
 router.get('/', (req, res) => {
     var query = (req.query['q'] || '').toLowerCase();
@@ -38,7 +51,17 @@ router.get('/', (req, res) => {
     return res.status(200).json(products);
 });
 
-router.post('/', (req, res) => {
+router.get('/:id', (req, res) => {
+    let productId = req.params.id;
+    const foundProduct = products.find((product) => product.id == productId);
+    if (foundProduct) {
+        res.json(foundProduct);
+    } else {
+        return res.status(400).json({msg: 'Product with id ' + productId + ' not found.'})
+    }
+});
+
+router.post('/', checkIfLoggedIn, (req, res) => {
     let product = req.body;
 
     if (product.id) {
@@ -52,7 +75,7 @@ router.post('/', (req, res) => {
     return res.status(200).json(product);
 });
 
-router.patch('/:id', (req, res) => {
+router.patch('/:id', checkIfLoggedIn, (req, res) => {
     let productId = req.params.id;
     const foundProduct = products.find((product) => product.id == productId);
     if (foundProduct) {
