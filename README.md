@@ -65,6 +65,9 @@ $ ng generate class <class name>
 # 產生服務骨架
 $ ng generate service <service name>
 
+# 建構新模組並連結至 AppModule
+$ ng generate module app-routing --flat --module=app
+
 # 執行測試
 $ ng test
 ```

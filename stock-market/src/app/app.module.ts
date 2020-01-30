@@ -12,6 +12,7 @@ import { StockDetailComponent } from './stock/stock-detail/stock-detail.componen
 import { LoginComponent } from './user/login/login.component';
 import { RegisterComponent } from './user/register/register.component';
 
+import { AppRoutingModule } from './app-routing.module';
 import { StockService } from './services/stock.service';
 import { MessageService } from './services/message.service';
 import { AuthService } from './services/auth.service';
@@ -36,7 +37,8 @@ import { StockAppInterceptor } from './services/stock-app.interceptor';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   // 建構服務的單一實例
   providers: [
