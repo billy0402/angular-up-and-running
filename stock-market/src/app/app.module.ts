@@ -17,6 +17,7 @@ import { StockService } from './services/stock.service';
 import { MessageService } from './services/message.service';
 import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
+import { StockLoadResolverService } from './resolver/stock-load-resolver.service';
 import { StockAppInterceptor } from './services/stock-app.interceptor';
 import { AuthGuard } from './guards/auth.guard';
 import { StockCreateDeactivateGuard } from './guards/stock-create-deactivate.guard';
@@ -48,6 +49,7 @@ import { StockCreateDeactivateGuard } from './guards/stock-create-deactivate.gua
     MessageService,
     AuthService,
     UserService,
+    StockLoadResolverService,
     AuthGuard,
     StockCreateDeactivateGuard,
     {
