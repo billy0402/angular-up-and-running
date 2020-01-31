@@ -1,15 +1,23 @@
-import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, CanDeactivate, RouterStateSnapshot} from '@angular/router';
+import {Observable} from 'rxjs';
+
+import {ProductCreateComponent} from '../products/product-create/product-create.component';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProductCreateDeactivateGuard implements CanActivate {
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
+export class ProductCreateDeactivateGuard implements CanDeactivate<ProductCreateComponent> {
+
+  constructor() {
   }
-  
+
+  canDeactivate(component: ProductCreateComponent,
+                currentRoute: ActivatedRouteSnapshot,
+                currentState: RouterStateSnapshot,
+                nextState?: RouterStateSnapshot):
+    boolean | Observable<boolean> | Promise<boolean> {
+    return window.confirm('Do you want to navigate away from this page?');
+  }
+
 }

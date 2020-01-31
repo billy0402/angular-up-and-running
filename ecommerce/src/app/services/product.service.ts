@@ -9,8 +9,6 @@ import {Product} from "../model/product";
 })
 export class ProductService {
 
-  public products: Product[];
-
   constructor(private _http: HttpClient) {
   }
 
@@ -20,6 +18,10 @@ export class ProductService {
         q: query
       }
     });
+  }
+
+  getProduct(id: number): Observable<Product> {
+    return this._http.get<Product>(`/api/product/${id}`);
   }
 
   createProduct(product: Product): Observable<any> {

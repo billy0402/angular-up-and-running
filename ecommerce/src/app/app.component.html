@@ -2,6 +2,29 @@
   <h1>
     Welcome to {{title}}!
   </h1>
-  <app-product-list #productList></app-product-list>
-  <app-product-create (productCreated)="productList.onCreate()"></app-product-create>
+
+  <div class="links">
+    <span>
+      <a routerLink="/login" routerLinkActive="active">
+        Login
+      </a>
+    </span>
+    <span>
+      <a routerLink="/register" routerLinkActive="active">
+        Register
+      </a>
+    </span>
+    <span>
+      <a routerLink="/product/list" routerLinkActive="active">
+        Product List
+      </a>
+    </span>
+    <span>
+      <a routerLink="/product/create" routerLinkActive="active">
+        Product Create
+      </a>
+    </span>
+  </div>
+
+  <router-outlet></router-outlet>
 </div>

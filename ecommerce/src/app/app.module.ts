@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { ProductItemComponent } from './products/product-item/product-item.component';
@@ -19,6 +19,7 @@ import { LocalStorageService } from './services/local-storage.service';
 import { ProductLoadResolverService } from './resolver/product-load-resolver.service';
 import { AuthGuard } from './guards/auth.guard';
 import { ProductCreateDeactivateGuard } from './guards/product-create-deactivate.guard';
+import { ProductAppInterceptor } from './services/product-app.interceptor';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,12 @@ import { ProductCreateDeactivateGuard } from './guards/product-create-deactivate
     LocalStorageService,
     ProductLoadResolverService,
     AuthGuard,
-    ProductCreateDeactivateGuard
+    ProductCreateDeactivateGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ProductAppInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

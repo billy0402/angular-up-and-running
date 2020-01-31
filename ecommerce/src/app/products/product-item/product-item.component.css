@@ -21,3 +21,7 @@
 .product-item.sale {
   background-color: lightseagreen;
 }
+
+.product-item .more {
+  float: right;
+}

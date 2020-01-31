@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 import {Observable, Subject} from 'rxjs';
-import {debounceTime, distinctUntilChanged, merge, share, startWith, switchMap} from "rxjs/operators";
+import {debounceTime, distinctUntilChanged, merge, share, startWith, switchMap} from 'rxjs/operators';
 
 import {Product} from '../../model/product';
 import {ProductQuantityChange} from '../../model/productQuantityChange';
 import {ProductService} from '../../services/product.service';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-product-list',
@@ -34,7 +36,9 @@ export class ProductListComponent implements OnInit {
   private searchSubject: Subject<string> = new Subject();
   private reloadProductList: Subject<void> = new Subject();
 
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService,
+              private authService: AuthService,
+              private _router: Router) {
   }
 
   ngOnInit() {
@@ -53,6 +57,10 @@ export class ProductListComponent implements OnInit {
   }
 
   onQuantityChange(change: ProductQuantityChange) {
+    if (!this.authService.isLoggedIn()) {
+      this._router.navigate(['login']);
+    }
+
     this.productService.changeQuantity(change.product, change.changeInQuantity)
       .subscribe(res => this.reloadProductList.next());
   }

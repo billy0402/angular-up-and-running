@@ -6,5 +6,6 @@ export interface Product {
   imageUrl: string;
   isOnSale: boolean;
   quantityInCart: number;
+  description: string;
 
 }
