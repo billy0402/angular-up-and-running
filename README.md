@@ -68,8 +68,11 @@ $ ng generate class <class name>
 # 產生服務骨架
 $ ng generate service <service name>
 
-# 建構新模組並連結至 AppModule
+# 建構路由模組並連結至 AppModule
 $ ng generate module app-routing --flat --module=app
+
+# 產生路由模組
+$ ng generate module <module name> --routing
 
 # 建構路徑保護
 $ ng generate guard <guard name>
