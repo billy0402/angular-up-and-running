@@ -15,7 +15,7 @@ import {MessageService} from '../../services/message.service';
 export class StockCreateComponent {
 
   // 除了表單模型，還加上 Stock 模型物件
-  private stock: Stock;
+  public stock: Stock;
   // 宣告時不再初始化 FormGroup
   public stockForm: FormGroup;
   public exchanges: string[] = ['NYSE', 'NASDAQ', 'OTHER'];

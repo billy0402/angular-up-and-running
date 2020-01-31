@@ -53,8 +53,11 @@ $ ng new <project name> --routing
 # 元件是否需要前綴
 $ ng new <project name> --prefix=acme
 
-# 執行應用程式
+# 執行應用程式，環境設定檔為 environment.ts
 $ ng serve
+
+# 執行應用程式，環境設定檔為 environment.prod.ts
+$ ng serve --prod
 
 # 建構新元件
 $ ng generate component <component name>
@@ -73,6 +76,16 @@ $ ng generate guard <guard name>
 
 # 執行測試
 $ ng test
+
+# 產生上線的檔案至 dist 目錄，單純建置
+$ ng build
+
+# 上線建置
+# 移除空白.醜化程式碼.AOT(Ahead-of-Time).以上線模式執行Angular.死程式消除
+$ ng build --prod --base-href=/app/
+
+# 修改基底路徑 (index.html 的 <base href="/"> 標籤)
+$ ng build --base-href=/app/
 ```
 
 ## project tree
