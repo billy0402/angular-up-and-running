@@ -1,16 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-// 匯入新建構的 stock-item 元件
-import { StockItemComponent } from './stock/stock-item/stock-item.component';
-import { StockCreateComponent } from './stock/stock-create/stock-create.component';
-import { StockListComponent } from './stock/stock-list/stock-list.component';
-import { StockDetailComponent } from './stock/stock-detail/stock-detail.component';
-import { LoginComponent } from './user/login/login.component';
-import { RegisterComponent } from './user/register/register.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { StockService } from './services/stock.service';
@@ -26,20 +18,11 @@ import { StockCreateDeactivateGuard } from './guards/stock-create-deactivate.gua
 @NgModule({
   // 宣告應用程式中使用的 HTML 元件與指示
   declarations: [
-    AppComponent,
-    // 將新元件加入 declarations
-    StockItemComponent,
-    StockCreateComponent,
-    StockListComponent,
-    StockDetailComponent,
-    LoginComponent,
-    RegisterComponent
+    AppComponent
   ],
   // 匯入其他 Angular 應用程式與函式庫模組
   imports: [
     BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule
   ],

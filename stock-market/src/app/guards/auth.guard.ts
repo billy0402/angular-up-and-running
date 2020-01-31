@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate {
     console.log('AuthGuard#canActivate not authorized to access page');
     // 儲存目前路徑並重新導回
     // 儲存在服務，加入查訊參數
-    this.router.navigate(['login']);
+    this.router.navigate(['user', 'login']);
 
     return false;
   }

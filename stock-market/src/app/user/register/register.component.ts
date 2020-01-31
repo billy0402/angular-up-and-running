@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit {
         console.log('Successfully registered');
         this.messageService.message = res.msg;
         // 使用 Router 導向某個路徑 (絕對路徑)
-        this.router.navigate(['login']);
+        this.router.navigate(['user', 'login']);
       }, (err) => {
         console.error('Error registering', err);
         this.messageService.message = err.error.msg;
