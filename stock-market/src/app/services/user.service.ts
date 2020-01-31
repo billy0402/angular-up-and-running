@@ -1,4 +1,5 @@
-import {Injectable} from '@angular/core';
+import {Inject, Injectable, Optional} from '@angular/core';
+import {APP_BASE_HREF} from '@angular/common';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
@@ -10,12 +11,16 @@ import {AuthService} from './auth.service';
 })
 export class UserService {
 
+  private baseUrl: string;
+
   constructor(private _http: HttpClient,
-              private authService: AuthService) {
+              private authService: AuthService,
+              @Optional() @Inject(APP_BASE_HREF) origin: string) {
+    this.baseUrl = `${origin}/api/stock`;
   }
 
   login(username: string, password: string): Observable<any> {
-    return this._http.post('/api/user/login', {
+    return this._http.post(`${this.baseUrl}/login`, {
       username: username,
       password: password
     }).pipe(map((res: any) => {
@@ -25,7 +30,7 @@ export class UserService {
   }
 
   register(username: string, password: string): Observable<any> {
-    return this._http.post('/api/user/register', {
+    return this._http.post(`${this.baseUrl}/register`, {
       username: username,
       password: password
     });

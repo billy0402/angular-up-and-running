@@ -122,3 +122,12 @@ ngDoCheck
     ngAfterViewChecked
 ngOnDestroy
 ```
+
+## [Angular Universal](https://github.com/angular/angular-cli/wiki/stories-universal-rendering)
+```shell
+# 建置 Angular Universal 應用程式
+$ ng run build:universal
+
+# 執行 Angular Universal 應用程式
+$ ng run serve:universal
+```

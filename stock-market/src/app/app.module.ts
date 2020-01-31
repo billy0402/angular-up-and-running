@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { APP_ID, Inject, NgModule, PLATFORM_ID } from '@angular/core';
+import { APP_BASE_HREF, isPlatformBrowser } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
@@ -22,7 +23,7 @@ import { StockCreateDeactivateGuard } from './guards/stock-create-deactivate.gua
   ],
   // 匯入其他 Angular 應用程式與函式庫模組
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({appId: 'stock-app'}),
     HttpClientModule,
     AppRoutingModule
   ],
@@ -42,9 +43,23 @@ import { StockCreateDeactivateGuard } from './guards/stock-create-deactivate.gua
       useClass: StockAppInterceptor,
       // 指出是個攔截程序陣列
       multi: true
+    },
+    {
+      provide: APP_BASE_HREF,
+      useValue: ''
     }
   ],
   // 啟動應用程式的進入元件
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    @Inject(APP_ID) private appId: string
+  ) {
+    const platform = isPlatformBrowser(platformId) ? 'in the browser' : 'on the server';
+    console.log(`Running ${platform} with appId=${appId}`);
+  }
+
+}
